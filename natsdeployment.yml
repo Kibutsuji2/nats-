@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nats
+  labels:
+    app: nats
+  namespace: nats
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nats
+  template:
+    metadata:
+      labels:
+        app: nats
+    spec:
+      containers:
+      - image: nats
+        name-container: nats-main
+        ports:
+        - containerPort: 4222
+          name: "clients"
+        - containerPort: 6222
+          name: "clustering"
+        - containerPort: 8222
+          name: "http-port"
